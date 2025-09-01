@@ -175,6 +175,34 @@
                 </div>
             </div>
         </main>
+
+        <div class="covid-section">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>COVID-19 Statistics</h3>
+                    <select id="covid-country" class="chart-filter">
+                        <option value="global">Global</option>
+                        <option value="usa">USA</option>
+                        <option value="india">India</option>
+                        <option value="brazil">Brazil</option>
+                    </select>
+                </div>
+                <div class="covid-stats">
+                    <div class="covid-stat confirmed">
+                        <h4>Confirmed</h4>
+                        <p id="covid-confirmed">-</p>
+                    </div>
+                    <div class="covid-stat recovered">
+                        <h4>Recovered</h4>
+                        <p id="covid-recovered">-</p>
+                    </div>
+                    <div class="covid-stat deaths">
+                        <h4>Deaths</h4>
+                        <p id="covid-deaths">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

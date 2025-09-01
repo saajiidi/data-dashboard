@@ -58,8 +58,39 @@ const elements = {
     chartFilters: {
         performance: document.querySelectorAll('.chart-actions button'),
         revenue: document.querySelector('.chart-filter')
-    }
+    },
+    covidConfirmed: document.getElementById('covid-confirmed'),
+    covidRecovered: document.getElementById('covid-recovered'),
+    covidDeaths: document.getElementById('covid-deaths'),
+    covidCountry: document.getElementById('covid-country')
 };
+
+async function fetchCovidData(country = 'all') {
+    try {
+        const response = await fetch(`https://disease.sh/v3/covid-19/${country === 'global' ? 'all' : `countries/${country}`}`);
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching COVID data:', error);
+        return null;
+    }
+}
+
+async function updateCovidData() {
+    const country = elements.covidCountry.value;
+    const data = await fetchCovidData(country);
+    
+    if (data) {
+        elements.covidConfirmed.textContent = formatNumber(data.cases);
+        elements.covidRecovered.textContent = formatNumber(data.recovered);
+        elements.covidDeaths.textContent = formatNumber(data.deaths);
+    }
+}
+
+// Add event listener
+if (elements.covidCountry) {
+    elements.covidCountry.addEventListener('change', updateCovidData);
+}
+
 
 // Format numbers with commas
 function formatNumber(num) {
@@ -471,6 +502,7 @@ function initEventListeners() {
 // Initialize the dashboard
 function initDashboard() {
     // Check for saved theme preference
+
     const savedTheme = localStorage.getItem('theme') || 'light';
     if (savedTheme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
@@ -485,6 +517,7 @@ function initDashboard() {
     populateTopProducts();
     populateTrafficSources();
     initEventListeners();
+    updateCovidData();
     
     // Simulate loading data
     setTimeout(simulateUpdates, 500);

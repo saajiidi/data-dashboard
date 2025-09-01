@@ -759,3 +759,30 @@ tr:last-child td {
 
 .w-100 { width: 100%; }
 .h-100 { height: 100%; }
+
+.covid-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.covid-stat {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.confirmed { background: rgba(67, 97, 238, 0.1); }
+.recovered { background: rgba(75, 181, 67, 0.1); }
+.deaths { background: rgba(239, 71, 111, 0.1); }
+
+.covid-stat h4 {
+    margin-bottom: 0.5rem;
+    color: var(--gray-600);
+}
+
+.covid-stat p {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
